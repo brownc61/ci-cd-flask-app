@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "yourdockerhubusername/flask-ci-app"
-        DOCKER_CREDENTIALS_ID = "dockerhub-creds-id"
+        DOCKER_IMAGE = "flask-ci-app"
     }
 
     stages {
@@ -19,11 +18,9 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Done') {
             steps {
-                withDockerRegistry([credentialsId: "$DOCKER_CREDENTIALS_ID", url: '']) {
-                    sh 'docker push $DOCKER_IMAGE'
-                }
+                echo "Pipeline complete. Docker image built locally as $DOCKER_IMAGE"
             }
         }
     }
